@@ -21,7 +21,7 @@ class ItemInCreate(RWSchema):
     title: str
     description: str
     body: Optional[str] = None
-    image: Optional[str] = "/frontend/public/placeholder.png"
+    image: Optional[str] = "../../../frontend/public/placeholder.png"
     tags: List[str] = Field([], alias="tagList")
 
 
