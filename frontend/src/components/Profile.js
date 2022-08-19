@@ -145,7 +145,7 @@ class Profile extends React.Component {
                   unfollow={this.props.onUnfollow}
                 />
               </div>
-            </div>  
+            </div>
           </div>
         </div>
 
