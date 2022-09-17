@@ -11,8 +11,7 @@ from app.db.repositories.users import UsersRepository
 
 from app.core.config import get_app_settings
 
-SETTINGS = get_app_settings()
-DATABASE_URL = SETTINGS.database_url.replace("postgres://", "postgresql://")
+
 
 
 def random_char(char_num):
@@ -20,6 +19,8 @@ def random_char(char_num):
            
 
 async def create():
+    SETTINGS = get_app_settings()
+    DATABASE_URL = SETTINGS.database_url.replace("postgres://", "postgresql://")
     conn = await asyncpg.connect(DATABASE_URL)
     usersRepository = UsersRepository(conn=conn)
     usersList=[]
