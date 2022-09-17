@@ -49,5 +49,3 @@ async def create():
     for i in range(0,100):
         body=''.join(random.choices(string.ascii_letters +string.digits))
         comment= await commentsRepository.create_comment_for_item(body=body,item=itemList[i],user=usersList[i])
-
-asyncio.run(create())
