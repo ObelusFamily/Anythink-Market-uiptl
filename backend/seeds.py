@@ -35,7 +35,7 @@ async def create():
         #usersList.append(us)
         user = await usersRepository.create_user(username=username, password=password, email=email)
         usersList.append(user)
-    print(usersList.length)
+    #print(usersList.length)
     itemList=[]
     for i in range(0,100):
         slug=''.join(random.choices(string.ascii_letters +string.digits))
