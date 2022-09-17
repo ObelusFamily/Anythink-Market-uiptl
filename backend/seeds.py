@@ -1,6 +1,6 @@
 
 #add 100 users, 100 comments, 100 products
-from re import A
+from re import A, I
 import string
 import asyncio
 import asyncpg
@@ -24,6 +24,8 @@ async def create():
     DATABASE_URL = SETTINGS.database_url.replace("postgres://", "postgresql://")
     conn = await asyncpg.connect(DATABASE_URL)
     usersRepository = UsersRepository(conn=conn)
+    itemsRepository = ItemsRepository(conn=conn)
+    commentsRepository = CommentsRepository(conn=conn)
     usersList=[]
     for i in range(0,100):
         username=''.join(random.choices(string.ascii_lowercase))
@@ -41,11 +43,11 @@ async def create():
         description=''.join(random.choices(string.ascii_letters +string.digits))
         seller=usersList[i]
 
-        item=await ItemsRepository.create_item(slug=slug,title=title,description=description,seller=seller)
+        item=await itemsRepository.create_item(slug=slug,title=title,description=description,seller=seller)
         itemList.append(item)
 
     for i in range(0,100):
         body=''.join(random.choices(string.ascii_letters +string.digits))
-        comment= await CommentsRepository.create_comment_for_item(body=body,item=itemList[i],user=usersList[i])
+        comment= await commentsRepository.create_comment_for_item(body=body,item=itemList[i],user=usersList[i])
 
 asyncio.run(create())
