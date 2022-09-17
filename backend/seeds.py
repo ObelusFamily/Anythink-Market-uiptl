@@ -1,5 +1,6 @@
 
 #add 100 users, 100 comments, 100 products
+from re import A
 import string
 import asyncio
 import asyncpg
@@ -32,7 +33,7 @@ async def create():
         #usersList.append(us)
         user = await usersRepository.create_user(username=username, password=password, email=email)
         usersList.append(user)
-    
+    print(usersList.length)
     itemList=[]
     for i in range(0,100):
         slug=''.join(random.choices(string.ascii_letters +string.digits))
@@ -46,3 +47,5 @@ async def create():
     for i in range(0,100):
         body=''.join(random.choices(string.ascii_letters +string.digits))
         comment= await CommentsRepository.create_comment_for_item(body=body,item=itemList[i],user=usersList[i])
+
+asyncio.run(create())
